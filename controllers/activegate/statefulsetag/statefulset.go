@@ -1,4 +1,4 @@
-package activegate
+package statefulsetag
 
 import (
 	"encoding/json"
@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	dynatracev1alpha1 "github.com/Dynatrace/dynatrace-operator/api/v1alpha1"
+	"github.com/Dynatrace/dynatrace-operator/controllers/activegate/shared"
 	"github.com/Dynatrace/dynatrace-operator/controllers/customproperties"
 	"github.com/Dynatrace/dynatrace-operator/controllers/dtpullsecret"
 	"github.com/pkg/errors"
@@ -44,8 +45,6 @@ const (
 	trustStoreVolume = "truststore-volume"
 )
 
-type StatefulSetEvent func(sts *appsv1.StatefulSet)
-
 type statefulSetProperties struct {
 	*dynatracev1alpha1.DynaKube
 	*dynatracev1alpha1.CapabilityProperties
@@ -54,7 +53,7 @@ type statefulSetProperties struct {
 	feature               string
 	capabilityName        string
 	serviceAccountOwner   string
-	onAfterCreateListener []StatefulSetEvent
+	onAfterCreateListener []shared.StatefulSetEvent
 }
 
 func NewStatefulSetProperties(instance *dynatracev1alpha1.DynaKube, capabilityProperties *dynatracev1alpha1.CapabilityProperties,
@@ -71,7 +70,7 @@ func NewStatefulSetProperties(instance *dynatracev1alpha1.DynaKube, capabilityPr
 		feature:               feature,
 		capabilityName:        capabilityName,
 		serviceAccountOwner:   serviceAccountOwner,
-		onAfterCreateListener: []StatefulSetEvent{},
+		onAfterCreateListener: []shared.StatefulSetEvent{},
 	}
 }
 
