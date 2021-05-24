@@ -291,10 +291,6 @@ func isProxyNilOrEmpty(proxy *dynatracev1alpha1.DynaKubeProxy) bool {
 	return proxy == nil || (proxy.Value == "" && proxy.ValueFrom == "")
 }
 
-func isKubernetesMonitoringEnabled(stsProperties *statefulSetProperties) bool {
-	return stsProperties != nil && stsProperties.DynaKube != nil && stsProperties.DynaKube.Spec.KubernetesMonitoringSpec.Enabled
-}
-
 func generateStatefulSetHash(sts *appsv1.StatefulSet) (string, error) {
 	data, err := json.Marshal(sts)
 	if err != nil {
