@@ -14,7 +14,7 @@ ENV OPERATOR=dynatrace-operator \
     USER_NAME=dynatrace-operator
 
 RUN  microdnf install unzip util-linux && microdnf clean all
-RUN  chmod -r 755 /ver/log
+RUN  chmod -r 755 /var/log
 COPY LICENSE /licenses/
 COPY third_party_licenses /usr/share/dynatrace-operator/third_party_licenses
 COPY build/_output/bin /usr/local/bin
